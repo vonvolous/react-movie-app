@@ -3,6 +3,9 @@
 ## 🌟 react 사용해 영화 사이트 만들기
 ### 1. MongoDB 연결
 ### 2. The MovieDB API : https://www.themoviedb.org/
+> #### Get Movie BY Latest
+> #### Get Movie Detail
+> #### Get Movie Reviews
 ### 2. Landing page 
 ### 3. Movie detail page
 ### 4. Favorite page
