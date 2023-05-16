@@ -8,11 +8,13 @@ import LoginPage from './components/views/LoginPage/LoginPage';
 import RegisterPage from './components/views/RegisterPage/RegisterPage';
 import NavBar from './components/views/NavBar/NavBar';
 import Footer from './components/views/Footer/Footer'
+import MovieDetail from './components/views/MovieDetail/MovieDetail';
 
 function App() {
   const AuthLandingPage = Auth(LandingPage, null);
   const AuthLoginPage = Auth(LoginPage, false);
   const AuthRegisterPage = Auth(RegisterPage, false);
+  const AuthMovieDetailPage = Auth(MovieDetail, null);
 
   return (
     <Suspense fallback={(<div>Loading...</div>)}>
@@ -22,6 +24,9 @@ function App() {
           <Route path="/" element={<AuthLandingPage />}></Route>
           <Route path="/login" element={<AuthLoginPage />}></Route>
           <Route path="/register" element={<AuthRegisterPage />}></Route>
+          <Route path="/movie/">
+            <Route path=":movieId" element={<AuthMovieDetailPage />}/>
+          </Route>
         </Routes>
       </div>
       <Footer />
