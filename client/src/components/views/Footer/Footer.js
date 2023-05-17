@@ -1,13 +1,15 @@
 import React from 'react'
+import './Footer.css'
 
 function Footer() {
   return (
-    <div style = {{
-      height: '80px', display: 'flex',
-      flexDirection: 'column', alignItems: 'center',
-      justifyContent: 'center', fontSize: '1rem'
-    }}>
-      <p> Happy Coding </p>
+    <div className='footer' style={{height: '80px',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '1rem'}}>
+      <p> Copyright © 2023 </p>
     </div>
   )
 }

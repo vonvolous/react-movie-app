@@ -49,8 +49,8 @@ app.post('/api/users/register', (req, res) => {
         })
     }).catch((err) => {
         return res.json({ success: false, err })
-    })
-})
+    });
+});
 
 //로그인 기능 구현
 app.post('/api/users/login', (req, res) => {
@@ -75,6 +75,7 @@ app.post('/api/users/login', (req, res) => {
                 if(err) return res.status(400).send(err);
 
                 //토큰을 저장한다, 어디에? 쿠키 or 로컬 스토리지
+                res.cookie("x_authExp", user.tokenExp);
                 res.cookie("x_auth", user.token)
                 .status(200)
                 .json({ loginSuccess: true, userId: user._id })
@@ -96,9 +97,9 @@ app.get('/api/users/auth', auth, (req, res) => {
         name: req.user.name,
         lastname: req.user.lastname,
         role: req.user.role,
-        image: req.user.image
-    })
-})
+        image: req.user.image,
+    });
+});
 
 //로그아웃 기능 구현
 app.get('/api/users/logout', auth, (req, res) => {
@@ -118,7 +119,20 @@ app.use('/uploads', express.static('uploads'));
 
 // port에서 앱 실행
 // 특정 포트 백서버로 둠
-const port = 8080
+const port = process.env.PORT || 8080
+
+// Request failed with status code 500 AxiosError
+const path = require("path");
+
+// production mode
+if(process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+  
+    app.get("*", (req, res) => {
+      // path는 여기에서만 사용되었다.
+      res.sendFile(path.join(__dirname, "../client/build/index.html"))
+    })
+  }
 
 app.listen(port, () => {
   console.log(`Server Running at port ${port}`)
