@@ -2,8 +2,11 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { loginUser } from '../../../_actions/user_action';
 import { useNavigate } from 'react-router-dom';
+import {Button, Typography, Input} from 'antd'
 
 function LoginPage() {
+  const {Title} = Typography;
+
   const dispatch = useDispatch();
   let navigate = useNavigate();
 
@@ -29,6 +32,7 @@ function LoginPage() {
     dispatch(loginUser(body))
     .then(response => {
       if(response.payload.loginSuccess) {
+        window.localStorage.setItem('userId', response.payload.userId);
         navigate('/') // 페이지 이동시 navigate 사용
       } else {
         alert('Error')
@@ -40,19 +44,20 @@ function LoginPage() {
   return (
     <div style={{
       display: 'flex', justifyContent: 'center', alignItems: 'center',
-      width: '100%', height: '100vh'
+      width: '100%', height: '80vh'
     }}>
-      <form style={{ display: 'flex', flexDirection: 'column' }}
+      <form style={{ maxWidth: '350px'}}
           onSubmit={onSubmitHandler}
       >
+        <Title style={{display:'flex', justifyContent: 'center', alignItems: 'center'}} level={2}>🌟 Log In 🌟</Title>
         <label>Email</label>
-        <input type="email" value = {Email} onChange = {onEmailHandler} />
+        <Input type="email" value = {Email} placeholder='Enter your email' onChange = {onEmailHandler} />
         <label>Password</label>
-        <input type="password" value = {Password} onChange = {onPasswordHandler} />
+        <Input type="password" value = {Password} placeholder='Enter your password' onChange = {onPasswordHandler} />
         <br />
-        <button type='submit'>
-          Login
-        </button>
+        <Button type="primary" htmlType="submit"  style={{ minWidth: '100%', marginTop: '15px'}}>
+          Log in
+        </Button>
       </form>
     </div>
   )

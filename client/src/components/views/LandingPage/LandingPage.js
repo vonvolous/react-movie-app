@@ -3,6 +3,8 @@ import { API_URL, API_KEY, IMAGE_BASE_URL } from '../../Config';
 import MainImage from './Sections/MainImage';
 import GridCards from '../commons/GridCards';
 import {Row} from 'antd';
+import { Button } from 'antd'
+import {FcIdea} from "react-icons/fc";
 
 function LandingPage() {
 
@@ -47,8 +49,7 @@ function LandingPage() {
         }
 
         <div style={{ width: '85%', margin: '1rem auto' }}> 
-  
-          <h2>Movies by latest~</h2>
+          <h2><FcIdea style={{fontSize: '2rem'}} /> Movies by latest</h2>
           <hr />
 
           {/* Movie Grid Cards */}
@@ -68,8 +69,8 @@ function LandingPage() {
 
         </div>
 
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <button onClick={loadMoreItems}>Load More</button>
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '13px' }}>
+          <Button onClick={loadMoreItems}>Load More</Button>
         </div>
 
       </div>

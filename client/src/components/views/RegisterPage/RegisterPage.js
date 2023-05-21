@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { registerUser } from '../../../_actions/user_action';
 import { useNavigate } from 'react-router-dom';
+import {Button, Typography, Input} from 'antd'
 
 function RegisterPage() {
+  const {Title} = Typography;
 
   const dispatch = useDispatch();
   let navigate = useNavigate();
@@ -56,24 +58,25 @@ function RegisterPage() {
   return (
     <div style={{
       display: 'flex', justifyContent: 'center', alignItems: 'center',
-      width: '100%', height: '100vh'
+      width: '100%', height: '80vh'
     }}>
-      <form style={{ display: 'flex', flexDirection: 'column' }}
+      <form style={{ maxWidth: '350px' }}
           onSubmit={onSubmitHandler}
       >
+        <Title style={{display:'flex', justifyContent: 'center', alignItems: 'center'}} level={2}>🌟 Sign In 🌟</Title>
         <label>Email</label>
-        <input type="email" value = {Email} onChange = {onEmailHandler} />
+        <Input type="email" value = {Email} placeholder='Enter your email' onChange = {onEmailHandler} />
         <label>Name</label>
-        <input type="text" value = {Name} onChange = {onNameHandler} />
+        <Input type="text" value = {Name} placeholder='Enter your name' onChange = {onNameHandler} />
         <label>Password</label>
-        <input type="password" value = {Password} onChange = {onPasswordHandler} />
+        <Input type="password" value = {Password} placeholder='Enter your passworc' onChange = {onPasswordHandler} />
         <label>Confirm Password</label>
-        <input type="password" value = {ConfirmPassword} onChange = {onConfirmPasswordHandler} />
+        <Input type="password" value = {ConfirmPassword} placeholder='Confirm your password' onChange = {onConfirmPasswordHandler} />
         
         <br />
-        <button type='submit'>
+        <Button type="primary" htmlType="submit"  style={{ minWidth: '100%', marginTop: '15px' }}>
           CREATE AN ACCOUNT
-        </button>
+        </Button>
       </form>
     </div>
   )
