@@ -38,7 +38,7 @@ router.post('/favorited', (req, res) => {
 })
 
 router.post('/removeFromFavorite', (req, res) => {
-    Favorite.findOneAndDelete({ moveId: req.body.movieId, userFrom: req.body.userFrom })
+    Favorite.findOneAndDelete({ movieId: req.body.movieId, userFrom: req.body.userFrom })
     .exec().then(function(doc) {
         res.status(200).json({ success: true, doc })
     }).catch(function(err) {
@@ -58,5 +58,27 @@ router.post('/addToFavorite', (req, res) => {
     
 })
 
+router.post('/getFavoredMovie', (req, res) => {
+
+   Favorite.find({'userFrom':req.body.userFrom})
+   .exec().then(function(favorites) {
+        res.status(200).json({ success: true, favorites })
+   }).catch(function(err) {
+        return res.status(400).send(err)
+   })
+    
+})
+
+router.post('/removeFromFavorite', (req, res) => {
+
+    Favorite.findOneAndDelete({ movieId: req.body.movieId, userFrom: req.body.userFrom })
+    .exec().then(function() {
+        res.status(200).json({ success: true })
+    }).catch(function(err) {
+        return res.status(400).send(err)
+    })
+     
+ })
+ 
 //다른 곳에서도 User 모델 사용할 수 있게 export함
 module.exports = router;
