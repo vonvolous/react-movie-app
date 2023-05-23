@@ -15,6 +15,7 @@
 
 ----------------------------------------
 
-# final result  https://vonvolous.github.io/react-movie-app/
+## 🌟 final result 
+> ### https://vonvolous.github.io/react-movie-app/
 
 [참고] https://www.inflearn.com/course/따라하며-배우는-노드-리액트-영화사이트-만들기
