@@ -14,6 +14,8 @@ function NavBar() {
   const [open, setOpen] = useState(false);
   const user = useSelector(state => state.user)
 
+  const userCheck = user.userData && !user.userData.isAuth;
+
   const onClickHandler = () => {
     axios.get('/api/users/logout')
     .then(response => {
@@ -26,12 +28,16 @@ function NavBar() {
   }
 
 
-  if (user.userData && !user.userData.isAuth) {
+  
     return (
       <nav className='navbar'>
         <Link to = '/' className="nav-logo" onClick={() => setOpen(false)}>
-          Logo
+          <p style={{marginTop: '30px', display: 'flex', flexDirection: 'row', justifyContent: 'center'}}> 
+            <RiMovie2Line style={{fontSize: '2rem'}}/>
+            <h2 style={{fonSize: '2rem'}}>MovieDoc</h2>
+          </p>
         </Link>
+        {userCheck ? (
         <ul className={open ? 'nav-links active' : 'nav-links'}>
           <li className='nav-item'>
             <Link to = '/' className='nav-link' onClick={() => setOpen(false)}>
@@ -48,18 +54,7 @@ function NavBar() {
               Sign Up
             </Link>
           </li>
-        </ul>
-      </nav>
-    )
-  } else {
-    return (
-      <nav className='navbar'>
-        <Link to = '/' className="nav-logo" onClick={() => setOpen(false)}>
-          <p style={{marginTop: '30px', display: 'flex', flexDirection: 'row', justifyContent: 'center'}}> 
-            <RiMovie2Line style={{fontSize: '2rem'}}/>
-            <h2 style={{fonSize: '2rem'}}>MovieDoc</h2>
-          </p>
-        </Link>
+        </ul>) : (
         <ul className={open ? 'nav-links active' : 'nav-links'}>
           <li className='nav-item'>
             <Link to = '/' className='nav-link' onClick={() => setOpen(false)}>
@@ -76,12 +71,9 @@ function NavBar() {
               <FiLogOut style={{fontSize: '1rem'}} />
             </button>
           </li>
-        </ul>
-      </nav>
+        </ul>)}
+      </nav>    
     )
-  }
-
-    
 }
 
 export default NavBar
